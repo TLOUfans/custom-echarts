@@ -128,7 +128,7 @@
             color: '#333'
           },
           position: '位于末端',
-          distance: 0,
+          distance: 15,
           stepLength: 0,
           display: '自动',
           scaleFonts: {

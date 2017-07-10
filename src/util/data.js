@@ -28,7 +28,20 @@ const data = {
       show: false
     }
   },
-  yAxis: {},
+  yAxis: {
+    nameTextStyle: {},
+    axisLabel: {
+      rotate: '',
+      textStyle: {}
+    },
+    splitLine: {
+      show: true,
+      lineStyle: {}
+    },
+    splitArea: {
+      show: false
+    }
+  },
   series: [{
     name: '销量',
     type: 'bar',
