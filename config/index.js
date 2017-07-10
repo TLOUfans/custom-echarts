@@ -1,6 +1,26 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
 
+const pmsApiList = [
+  'Account', 'API', 'WebCenter', 'Form', 'scripts', 'PowerPlat', 'Scripts', 'App_Themes', 'Projects', 'Resource','Images'
+];
+
+let proxyTable = {};
+pmsApiList.forEach(v => {
+  const pathRewrite = {};
+  pathRewrite[`^/${v}`] = `/${v}`;
+  proxyTable[`/${v}`] = {
+    target: 'http://192.168.0.113:9090',
+    changeOrigin: true,
+    secure: false,
+    headers: {
+      Referer: 'http://192.168.0.113:9090'
+    },
+    pathRewrite: pathRewrite
+  }
+});
+
+
 module.exports = {
   build: {
     env: require('./prod.env'),
@@ -27,7 +47,7 @@ module.exports = {
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: proxyTable,
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)
