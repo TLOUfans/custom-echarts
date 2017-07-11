@@ -28,6 +28,9 @@
     <el-col :span="12">
       <template>
         <el-tabs v-model="activeName">
+          <el-tab-pane label="映射" name="zero">
+            <my-mapping></my-mapping>
+          </el-tab-pane>
           <el-tab-pane label="作图方式" name="first">
             <my-data></my-data>
           </el-tab-pane>
@@ -47,14 +50,27 @@
               </el-tab-pane>
             </el-tabs>
           </el-tab-pane>
-          <el-tab-pane label="图例" name="fifth">图例</el-tab-pane>
-          <el-tab-pane label="提示" name="sixth">提示</el-tab-pane>
-          <el-tab-pane label="工具" name="seventh">工具</el-tab-pane>
-          <el-tab-pane label="序列" name="eighth">序列</el-tab-pane>
-          <el-tab-pane label="高级" name="ninth">高级</el-tab-pane>
+          <el-tab-pane label="图例" name="fifth">
+            <my-legend :option="option" :mainCharts="mainCharts"></my-legend>
+          </el-tab-pane>
+          <el-tab-pane label="提示" name="sixth">
+            <my-tip :option="option" :mainCharts="mainCharts"></my-tip>
+          </el-tab-pane>
+          <el-tab-pane label="工具" name="seventh">
+            <my-tool :option="option" :mainCharts="mainCharts"></my-tool>
+          </el-tab-pane>
+          <el-tab-pane label="序列" name="eighth">
+            <my-sequ :option="option" :mainCharts="mainCharts"></my-sequ>
+          </el-tab-pane>
+          <el-tab-pane label="高级" name="ninth">
+            <my-advance :option.sync="option" :mainCharts.sync="mainCharts"></my-advance>
+          </el-tab-pane>
           <el-tab-pane label="扩展属性" name="tenth">扩展属性</el-tab-pane>
         </el-tabs>
       </template>
+    </el-col>
+    <el-col :span="12">
+      
     </el-col>
     <el-col :span="24">
       <div class="echarts">
@@ -69,8 +85,7 @@
     data
   } from '../util/data.js'
 
-  import {Login ,bidApplication} from '../api';
-
+  import {Login, bidApplication} from '../api'
   export default {
     name: 'index',
     data() {
@@ -81,7 +96,9 @@
         //是否为饼图
         isEdward: true,
         //数据
-        option: data
+        option: data,
+        meta: [],
+        tableData: []
       }
     },
     methods: {
@@ -95,6 +112,7 @@
       }
     },
     mounted() {
+      
       let chartBox = document.getElementsByClassName('echarts')[0]
       let myCharts = document.getElementById('myCharts')
 
@@ -107,7 +125,11 @@
       this.mainCharts.setOption(this.option);
     },
     created(){
-      
+      Login().then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 

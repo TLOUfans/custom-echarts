@@ -3,9 +3,28 @@ const data = {
     text: 'ECharts 入门示例',
     textStyle: {}
   },
-  tooltip: {},
+  tooltip: {
+    textStyle: {}
+  },
+  toolbox: {
+    feature: {
+      dataView: {
+        show: false
+      },
+      dataZoom: {
+        show: false
+      },
+      restore: {
+        show: false
+      },
+      saveAsImage: {
+        show: false
+      }
+    }
+  },
   legend: {
-    data: ['销量']
+    data: ['销量'],
+    textStyle: {}
   },
   grid: {
     x: '80',
@@ -45,7 +64,25 @@ const data = {
   series: [{
     name: '销量',
     type: 'bar',
-    data: [5, 20, 36, 10, 10, 20]
+    data: [5, 20, 36, 10, 10, 20],
+    itemStyle: {
+      normal: {},
+      emphasis: {}
+    },
+    label: {
+      normal: {
+        textStyle: {}
+      },
+      emphasis: {
+        textStyle: {}
+      }
+    },
+    markPoint: {
+      data: []
+    },
+    markLine: {
+      data: []
+    }
   }]
 }
 export {

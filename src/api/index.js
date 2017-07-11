@@ -27,7 +27,7 @@ export const bidApplication = () => {
         index: "0",
         size: "15",
         swhere: ""
-      })
+      }, resolve)
     } catch (err) {
       reject(err)
     }
