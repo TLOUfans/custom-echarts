@@ -75,7 +75,7 @@ const fonts = {
   }],
   weight: [{
       label: '常规',
-      value: 'nomal',
+      value: 'normal',
     },
     {
       label: '加粗',

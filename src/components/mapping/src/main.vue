@@ -6,7 +6,6 @@
 </template>
 
 <script>
-  import {bidApplication} from '@/api'
   export default {
     name: 'my-mapping',
     data() {
@@ -15,16 +14,7 @@
       }
     },
     mounted() {
-      bidApplication().then(res => {
-        let title = JSON.parse(JSON.parse(res).data.meta)
-        Object.keys(title).forEach((o, i) => {
-          this.tableData.push({
-            label: o,
-            value: title[o]
-          })
-        })
-        console.log(this.tableData)
-      })
+      
     }
   }
 </script>

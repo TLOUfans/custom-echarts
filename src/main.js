@@ -18,6 +18,7 @@ import Tip from './components/tip/index'
 import Tool from './components/tool/index'
 import Sequ from './components/sequ/index'
 import Advance from './components/advance/index'
+import Font from './components/font/index'
 
 require('echarts/theme/macarons')
 require('echarts/theme/dark')
@@ -39,10 +40,11 @@ Vue.use(Tip)
 Vue.use(Tool)
 Vue.use(Sequ)
 Vue.use(Advance)
+Vue.use(Font)
 Vue.prototype.$echarts = echarts
 
 /* eslint-disable no-new */
-new Vue({
+let vm = new Vue({
   el: '#app',
   router,
   template: '<App/>',

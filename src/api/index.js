@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+//登陆
 export const Login = () => {
   return new Promise((resolve, reject) => {
     try {
@@ -16,19 +17,50 @@ export const Login = () => {
   })
 }
 
-export const bidApplication = () => {
+export const queryDataSource = (data) => {
   return new Promise((resolve, reject) => {
     try {
       $.post('/Form/GridPageLoad', {
-        KeyWord: 'NPMS_BID_BidApplication',
-        KeyWordType: 'BO',
-        select: "",
-        sort: "",
-        index: "0",
-        size: "15",
-        swhere: ""
+        KeyWord: data.KeyWord,
+        KeyWordType: data.KeyWordType || 'BO',
+        select: data.select || "",
+        sort: data.sort || "",
+        index: data.index || "0",
+        size: data.size || "15",
+        swhere: data.swhere || ""
       }, resolve)
     } catch (err) {
+      reject(err)
+    }
+  })
+}
+
+
+//保存图标配置信息
+export const saveSetting = (data) => {
+  return new Promise((resolve, reject) => {
+    try {
+      $.post('/Form/SaveWebForm', data, resolve)
+    } catch(err) {
+      reject(err)
+    }
+  })
+}
+
+//查询图标配置信息
+export const querySetting = (data) => {
+  return new Promise((resolve, reject) => {
+    try {
+      $.post('/Form/GridPageLoad', {
+        KeyWord: 'NPMS_ECH_Setting',
+        KeyWordType: 'BO',
+        select: data.select || 'Setting',
+        sort: data.sort || '',
+        index: data.index || '0',
+        size: data.size || '15',
+        swhere: data.swhere || ''
+      }, resolve)
+    } catch(err) {
       reject(err)
     }
   })

@@ -1,10 +1,26 @@
 const data = {
+  backgroundColor: 'rgba(255, 255, 255, 1)',
+  animation: true,
   title: {
     text: 'ECharts 入门示例',
-    textStyle: {}
+    textStyle: {
+      fontFamily: 'sans-serif',
+      fontSize: '18',
+      fontWeight: 'normal',
+      color: '#333'
+    },
+    x: 'left'
   },
   tooltip: {
-    textStyle: {}
+    show: true,
+    borderWidth: '0',
+    backgroundColor: 'rgba(50, 50, 50, 0.7)',
+    textStyle: {
+      fontFamily: 'sans-serif',
+      fontSize: '14',
+      fontWeight: 'nomal',
+      color: '#fff'
+    }
   },
   toolbox: {
     feature: {
@@ -23,8 +39,15 @@ const data = {
     }
   },
   legend: {
-    data: ['销量'],
-    textStyle: {}
+    data: ['蒸发量','降水量'],
+    left: 'middle',
+    top: 'auto',
+    textStyle: {
+      fontFamily: 'sans-serif',
+      fontSize: '12',
+      fontWeight: 'normal',
+      color: '#333'
+    }
   },
   grid: {
     x: '80',
@@ -33,55 +56,168 @@ const data = {
     y1: '60'
   },
   xAxis: {
-    data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
-    nameTextStyle: {},
+    name: '',
+    data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+    nameTextStyle: {
+      fontFamily: 'sans-serif',
+      fontSize: '12',
+      fontWeight: 'normal',
+      color: '#333'
+    },
+    nameLocation: 'end',
+    nameGap: '15',
     axisLabel: {
-      rotate: '',
-      textStyle: {}
+      show: true,
+      interval: '0',
+      rotate: '0',
+      textStyle: {
+        fontFamily: 'sans-serif',
+        fontSize: '12',
+        fontWeight: 'normal',
+        color: '#333'
+      }
     },
     splitLine: {
       show: false,
-      lineStyle: {}
+      lineStyle: {
+        type: 'solid',
+        width: '1',
+        color: '#ccc'
+      }
     },
     splitArea: {
       show: false
     }
   },
   yAxis: {
-    nameTextStyle: {},
+    name: '',
+    nameTextStyle: {
+      fontFamily: 'sans-serif',
+      fontSize: '12',
+      fontWeight: 'normal',
+      color: '#333'
+    },
+    nameLocation: 'end',
+    nameGap: '15',
     axisLabel: {
-      rotate: '',
-      textStyle: {}
+      show: true,
+      rotate: '0',
+      textStyle: {
+        fontFamily: 'sans-serif',
+        fontSize: '12',
+        fontWeight: 'normal',
+        color: '#333'
+      }
     },
     splitLine: {
       show: true,
-      lineStyle: {}
+      lineStyle: {
+        type: 'solid',
+        width: '1',
+        color: '#ccc'
+      }
     },
     splitArea: {
       show: false
     }
   },
   series: [{
-    name: '销量',
+    name: '蒸发量',
     type: 'bar',
-    data: [5, 20, 36, 10, 10, 20],
-    itemStyle: {
-      normal: {},
-      emphasis: {}
-    },
-    label: {
-      normal: {
-        textStyle: {}
-      },
-      emphasis: {
-        textStyle: {}
-      }
-    },
+    width: '0',
+    data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
     markPoint: {
-      data: []
+      show: false
     },
     markLine: {
       data: []
+    },
+    itemStyle: {
+      normal: {
+        color: '',
+      },
+      emphasis: {
+        color: ''
+      }
+    },
+    label: {
+      normal: {
+        show: false,
+        position: 'inside',
+        textStyle: {
+          fontFamily: 'sans-serif',
+          fontSize: '12',
+          fontWeight: 'normal',
+          color: '#fff'
+        }
+      },
+      emphasis: {
+        show: false,
+        position: 'inside',
+        textStyle: {
+          fontFamily: 'sans-serif',
+          fontSize: '12',
+          fontWeight: 'normal',
+          color: '#fff'
+        }
+      }
+    },
+    markPoint: {
+      data: [],
+      select: []
+    },
+    markLine: {
+      data: [],
+      select: []
+    }
+  },{
+    name: '降水量',
+    type: 'bar',
+    width: '0',
+    data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+    markPoint: {
+      show: false
+    },
+    markLine: {
+      data: []
+    },
+    itemStyle: {
+      normal: {
+        color: '',
+      },
+      emphasis: {
+        color: ''
+      }
+    },
+    label: {
+      normal: {
+        show: false,
+        position: 'inside',
+        textStyle: {
+          fontFamily: 'sans-serif',
+          fontSize: '12',
+          fontWeight: 'normal',
+          color: '#fff'
+        }
+      },
+      emphasis: {
+        show: false,
+        position: 'inside',
+        textStyle: {
+          fontFamily: 'sans-serif',
+          fontSize: '12',
+          fontWeight: 'normal',
+          color: '#fff'
+        }
+      }
+    },
+    markPoint: {
+      data: [],
+      select: []
+    },
+    markLine: {
+      data: [],
+      select: []
     }
   }]
 }
