@@ -6,19 +6,42 @@
       </el-select>
     </el-form-item>
     <div v-for="(series, index) in option.series" :index="index" v-show="index == show">
-      <el-form-item label="柱子宽度">
+      <el-form-item label="柱子宽度" v-if="!isPie">
         <el-input-number v-model="option.series[index].barWidth" :min="0"></el-input-number>
+      </el-form-item>
+      <el-form-item label="鼠标点击模式" v-if="isPie">
+        <el-radio-group v-model="option.series[index].selectedMode">
+          <el-radio :label="false">不可选</el-radio>
+          <el-radio label="single">单选</el-radio>
+          <el-radio label="multiple">多选</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="指标名称" v-if="isPie">
+        <el-switch on-color="#13ce66" off-color="#ff4949"></el-switch>
+      </el-form-item>
+      <el-form-item label="指标样式" v-if="isPie">
+        
+      </el-form-item>
+      <el-form-item label="显示最大值" v-if="isPie">
+        
+      </el-form-item>
+      <el-form-item label="南丁格耳图" v-if="isPie">
+        <el-radio-group v-model="option.series[index].roseType">
+          <el-radio :label="false">不显示</el-radio>
+          <el-radio label="radius">半径和面积模式</el-radio>
+          <el-radio label="area">半径模式</el-radio>
+        </el-radio-group>
       </el-form-item>
       <div style="text-align:left; padding:0 0 20px 90px;">
         <el-tag>普通状态</el-tag>
       </div>
-      <el-form-item label="系列主色">
+      <el-form-item label="系列主色" v-if="!isPie">
         <el-color-picker v-model="option.series[index].itemStyle.normal.color"></el-color-picker>
       </el-form-item>
       <el-form-item label="数据项标签">
         <el-switch v-model="option.series[index].label.normal.show" on-color="#13ce66" off-color="#ff4949"></el-switch>
       </el-form-item>
-      <el-form-item label="位置">
+      <el-form-item label="位置" v-if="!isPie">
         <el-radio-group v-model="option.series[index].label.normal.position">
           <el-radio label="top">居上</el-radio>
           <el-radio label="insideBottom">居下</el-radio>
@@ -27,19 +50,32 @@
           <el-radio label="inside">内部</el-radio>
         </el-radio-group>
       </el-form-item>
+      <el-form-item label="位置" v-if="isPie">
+        <el-radio-group v-model="option.series[index].label.normal.position">
+          <el-radio label="outside">外侧</el-radio>
+          <el-radio label="inside">内部</el-radio>
+        </el-radio-group>
+      </el-form-item>
       <el-form-item label="文本样式">
         <my-font :textStyle.sync="option.series[index].label.normal.textStyle"></my-font>
+      </el-form-item>
+      <el-form-item label="数据标签内容" v-if="isPie">
+        <el-radio-group v-model="option.series[index].label.normal.formatter">
+          <el-radio label="{b}">数据名</el-radio>
+          <el-radio label="{c}">数据值</el-radio>
+          <el-radio label="{d}">百分比</el-radio>
+        </el-radio-group>
       </el-form-item>
       <div style="text-align:left; padding:0 0 20px 90px;">
         <el-tag>高亮状态</el-tag>
       </div>
-      <el-form-item label="系列主色">
+      <el-form-item label="系列主色" v-if="!isPie">
         <el-color-picker v-model="option.series[index].itemStyle.emphasis.color"></el-color-picker>
       </el-form-item>
       <el-form-item label="数据项标签">
         <el-switch v-model="option.series[index].label.emphasis.show" on-color="#13ce66" off-color="#ff4949"></el-switch>
       </el-form-item>
-      <el-form-item label="位置">
+      <el-form-item label="位置" v-if="!isPie">
         <el-radio-group v-model="option.series[index].label.emphasis.position">
           <el-radio label="top">居上</el-radio>
           <el-radio label="insideBottom">居下</el-radio>
@@ -48,16 +84,29 @@
           <el-radio label="inside">内部</el-radio>
         </el-radio-group>
       </el-form-item>
+      <el-form-item label="位置" v-if="isPie">
+        <el-radio-group v-model="option.series[index].label.emphasis.position">
+          <el-radio label="outside">外侧</el-radio>
+          <el-radio label="inside">内部</el-radio>
+        </el-radio-group>
+      </el-form-item>
       <el-form-item label="文本样式">
         <my-font :textStyle="option.series[index].label.emphasis.textStyle"></my-font>
       </el-form-item>
-      <el-form-item label="数据标注">
+      <el-form-item label="数据标签内容" v-if="isPie">
+        <el-radio-group v-model="option.series[index].label.emphasis.formatter">
+          <el-radio label="{b}">数据名</el-radio>
+          <el-radio label="{c}">数据值</el-radio>
+          <el-radio label="{d}">百分比</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="数据标注" v-if="!isPie">
         <el-checkbox-group v-model="option.series[index].markPoint.select" @change="markPointChange">
           <el-checkbox label="min">最小值</el-checkbox>
           <el-checkbox label="max">最大值</el-checkbox>
         </el-checkbox-group>
       </el-form-item>
-      <el-form-item label="数据标线">
+      <el-form-item label="数据标线" v-if="!isPie">
         <el-checkbox-group v-model="option.series[index].markLine.select" @change="markLineChange">
           <el-checkbox label="average">平均值</el-checkbox>
           <el-checkbox label="min">最小值</el-checkbox>
@@ -71,7 +120,7 @@
 <script>
   export default {
     name: 'my-sequ',
-    props: ['option', 'mainCharts'],
+    props: ['option', 'isPie', 'mainCharts'],
     data() {
       return {
         seriesItem: '',

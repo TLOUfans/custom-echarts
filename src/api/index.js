@@ -17,6 +17,7 @@ export const Login = () => {
   })
 }
 
+//查询数据
 export const queryDataSource = (data) => {
   return new Promise((resolve, reject) => {
     try {
@@ -35,8 +36,7 @@ export const queryDataSource = (data) => {
   })
 }
 
-
-//保存图标配置信息
+//保存图表配置信息
 export const saveSetting = (data) => {
   return new Promise((resolve, reject) => {
     try {
@@ -47,14 +47,14 @@ export const saveSetting = (data) => {
   })
 }
 
-//查询图标配置信息
+//查询图表配置信息
 export const querySetting = (data) => {
   return new Promise((resolve, reject) => {
     try {
       $.post('/Form/GridPageLoad', {
         KeyWord: 'NPMS_ECH_Setting',
         KeyWordType: 'BO',
-        select: data.select || 'Setting',
+        select: data.select || 'BarSetting, PieSetting',
         sort: data.sort || '',
         index: data.index || '0',
         size: data.size || '15',

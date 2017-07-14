@@ -11,7 +11,7 @@
     <el-form-item label="背景颜色">
       <el-color-picker v-model="option.backgroundColor" show-alpha></el-color-picker>
     </el-form-item>
-    <el-form-item label="边距">
+    <el-form-item label="边距" v-if="!isPie">
       <div class="divContainer">
         <el-tag>左</el-tag>
         <el-input-number v-model="option.grid.x"></el-input-number>
@@ -38,7 +38,7 @@
 <script>
   export default {
     name: 'my-base',
-    props: ['option', 'mainCharts'],
+    props: ['option', 'mainCharts', 'isPie'],
     data() {
       return {
         baseSetting: {

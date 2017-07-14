@@ -169,7 +169,8 @@ export const createPack = (data) => {
     NPMS_ECH_Setting: {
       keyWordType: null,
       data: [{
-        Setting: data.setting,
+        BarSetting: data.barSetting,
+        PieSetting: data.pieSetting,
         UserID: data.userID
       }]
     }

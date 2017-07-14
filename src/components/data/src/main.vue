@@ -1,38 +1,39 @@
 <template>
-  <el-form :model="mappingMethodForm" label-width="160px">
-    <el-form-item label="汇总、计算项作图">
-      <el-checkbox-group v-model="mappingMethodForm.sumMapping" style="text-align: left;padding-left: 20px;">
-        <el-checkbox label="" name="sumMapping"></el-checkbox>
-      </el-checkbox-group>
-    </el-form-item>
-    <el-form-item label="列汇总、计算项作图">
-      <el-checkbox-group v-model="mappingMethodForm.cloumnSumMapping" style="text-align: left;padding-left: 20px;">
-        <el-checkbox label="" name="cloumnSumMapping"></el-checkbox>
-      </el-checkbox-group>
-    </el-form-item>
-    <el-form-item label="作图方式">
-      <div style="text-align:left; padding-left:20px">
-        <el-radio-group v-model="mappingMethodForm.mappingMethod">
-          <el-radio label="按行全选"></el-radio>
-          <el-radio label="按列全选"></el-radio>
-          <el-radio label="按行"></el-radio>
-          <el-radio label="按列"></el-radio>
-        </el-radio-group>
-      </div>
-    </el-form-item>
-  </el-form>
+  <div>
+    <el-form label-width="160px" align="left">
+      <el-form-item label="选择x轴">
+        <el-select>
+          <el-option v-for="m in meta" :value="m.name" :label="m.name"></el-option>
+        </el-select>
+      </el-form-item>
+    </el-form>
+    <el-table :data="meta" width="100%" border @select="checkboxSelect">
+      <el-table-column label="操作" type="selection"></el-table-column>
+      <el-table-column label="数据列" prop="name"></el-table-column>
+      <el-table-column label="数据类型" prop="type"></el-table-column>
+      <el-table-column label="映射">
+        <template scope="scope">
+          <el-input :value="scope.row.name"></el-input>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-table :data="value" width="100%" border>
+      <el-table-column v-for="s in selection" :prop="s.name" :label="s.name" header-align="center"></el-table-column>
+    </el-table>
+  </div>
 </template>
 
 <script>
   export default {
     name: 'my-data',
+    props: ['meta', 'value', 'selection'],
     data() {
       return {
-        mappingMethodForm: {
-          sumMapping: '',
-          cloumnSumMapping: '',
-          mappingMethod: ''
-        }
+      }
+    },
+    methods: {
+      checkboxSelect(selection, row) {
+        this.$emit('rowSelect', selection)
       }
     }
   }
