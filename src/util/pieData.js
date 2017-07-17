@@ -95,6 +95,14 @@ export const pieData = {
       value: 2.3,
       name: '12月'
     }],
+    labelLine: {
+      normal: {
+        show: true
+      },
+      emphasis: {
+        show: true
+      }
+    },
     label: {
       normal: {
         show: true,
@@ -163,6 +171,14 @@ export const pieData = {
       value: 3.3,
       name: '12月'
     }],
+    labelLine: {
+      normal: {
+        show: true
+      },
+      emphasis: {
+        show: true
+      }
+    },
     label: {
       normal: {
         show: true,

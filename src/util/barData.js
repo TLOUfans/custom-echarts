@@ -36,7 +36,8 @@ export const barData = {
       },
       saveAsImage: {
         show: false
-      }
+      },
+      magicType: {type: ['line', 'bar']}
     }
   },
   legend: {

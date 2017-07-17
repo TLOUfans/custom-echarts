@@ -6,9 +6,6 @@
       </el-select>
     </el-form-item>
     <div v-for="(series, index) in option.series" :index="index" v-show="index == show">
-      <el-form-item label="柱子宽度" v-if="!isPie">
-        <el-input-number v-model="option.series[index].barWidth" :min="0"></el-input-number>
-      </el-form-item>
       <el-form-item label="鼠标点击模式" v-if="isPie">
         <el-radio-group v-model="option.series[index].selectedMode">
           <el-radio :label="false">不可选</el-radio>
@@ -16,16 +13,7 @@
           <el-radio label="multiple">多选</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="指标名称" v-if="isPie">
-        <el-switch on-color="#13ce66" off-color="#ff4949"></el-switch>
-      </el-form-item>
-      <el-form-item label="指标样式" v-if="isPie">
-        
-      </el-form-item>
-      <el-form-item label="显示最大值" v-if="isPie">
-        
-      </el-form-item>
-      <el-form-item label="南丁格耳图" v-if="isPie">
+      <el-form-item label="南丁格尔图" v-if="isPie">
         <el-radio-group v-model="option.series[index].roseType">
           <el-radio :label="false">不显示</el-radio>
           <el-radio label="radius">半径和面积模式</el-radio>
@@ -38,8 +26,11 @@
       <el-form-item label="系列主色" v-if="!isPie">
         <el-color-picker v-model="option.series[index].itemStyle.normal.color"></el-color-picker>
       </el-form-item>
-      <el-form-item label="数据项标签">
+      <el-form-item label="数据项标签" v-if="!isPie">
         <el-switch v-model="option.series[index].label.normal.show" on-color="#13ce66" off-color="#ff4949"></el-switch>
+      </el-form-item>
+      <el-form-item label="数据项标签" v-if="isPie">
+        <el-switch v-model="option.series[index].label.normal.show" on-color="#13ce66" off-color="#ff4949" @change="normalLabelChange"></el-switch>
       </el-form-item>
       <el-form-item label="位置" v-if="!isPie">
         <el-radio-group v-model="option.series[index].label.normal.position">
@@ -72,8 +63,11 @@
       <el-form-item label="系列主色" v-if="!isPie">
         <el-color-picker v-model="option.series[index].itemStyle.emphasis.color"></el-color-picker>
       </el-form-item>
-      <el-form-item label="数据项标签">
+      <el-form-item label="数据项标签" v-if="!isPie">
         <el-switch v-model="option.series[index].label.emphasis.show" on-color="#13ce66" off-color="#ff4949"></el-switch>
+      </el-form-item>
+      <el-form-item label="数据项标签" v-if="isPie">
+        <el-switch v-model="option.series[index].label.emphasis.show" on-color="#13ce66" off-color="#ff4949" @change="emphasisLabelChange"></el-switch>
       </el-form-item>
       <el-form-item label="位置" v-if="!isPie">
         <el-radio-group v-model="option.series[index].label.emphasis.position">
@@ -168,6 +162,13 @@
       //切换数据列配置
       seriesItemChange(value) {
         this.show = value
+      },
+      //标签按钮
+      normalLabelChange(value) {
+        this.option.series[this.show].labelLine.normal.show = value
+      },
+      emphasisLabelChange(value) {
+        this.option.series[this.show].labelLine.emphasis.show = value
       }
     }
   }

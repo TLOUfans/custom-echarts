@@ -138,37 +138,52 @@
       }
       resizeCharts()
       this.mainCharts = this.$echarts.init(myCharts)
+      const _self = this
+      this.mainCharts.on('magictypechanged', (params) => {
+        let graphicsType = params.currentType
+        _self.barOption.series.map((o, i) => {
+          return o.type = graphicsType
+        })
+      })
+
       
       //查询图表配置
-      querySetting({
-        swhere: `UserID='${this.userID}'`
-      }).then(res => {
-        let barOption = JSON.parse(JSON.parse(JSON.parse(res).data.value)[0].BarSetting)
-        let pieOption = JSON.parse(JSON.parse(JSON.parse(res).data.value)[0].PieSetting)
-        this.barOption = barOption
-        this.pieOption = pieOption
-      })
+      // querySetting({
+      //   swhere: `UserID='${this.userID}'`
+      // }).then(res => {
+      //   let barOption = JSON.parse(JSON.parse(JSON.parse(res).data.value)[0].BarSetting)
+      //   let pieOption = JSON.parse(JSON.parse(JSON.parse(res).data.value)[0].PieSetting)
+      //   this.barOption = barOption
+      //   this.pieOption = pieOption
+      // })
     },
     created() {
       //登陆PMS
-      Login().then(res => {
-        sessionStorage.userID = JSON.parse(res).data.humanid
-        this.$message.success('登陆成功')
-      }).catch(err => {
-        console.log(err)
-      })
+      // Login().then(res => {
+      //   sessionStorage.userID = JSON.parse(res).data.humanid
+      //   this.$message.success('登陆成功')
+      // }).catch(err => {
+      //   console.log(err)
+      // })
     },
     watch: {
       barOption: {
-        handler: function(){
+        handler: function() {
           if(this.isBar) {
+            let currentOption = this.mainCharts.getOption()
+            if(currentOption) {
+              let graphicsType = currentOption.series[0].type
+              this.barOption.series.map((o, i) => {
+                return o.type = graphicsType
+              })
+            }
             this.mainCharts.setOption(this.barOption)
           }
         },
         deep: true
       },
       pieOption: {
-        handler: function(){
+        handler: function(val, oldVal) {
           if(!this.isBar) {
             this.mainCharts.setOption(this.pieOption)
           }
