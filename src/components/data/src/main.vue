@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form label-width="160px" align="left">
+    <el-form label-width="130px" align="left">
       <el-form-item label="选择x轴">
         <el-select>
           <el-option v-for="m in meta" :value="m.name" :label="m.name"></el-option>

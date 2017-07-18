@@ -165,12 +165,10 @@ export const barData = {
       }
     },
     markPoint: {
-      data: [],
-      select: []
+      data: []
     },
     markLine: {
-      data: [],
-      select: []
+      data: []
     }
   },{
     name: '蒸发量',
@@ -214,12 +212,10 @@ export const barData = {
       }
     },
     markPoint: {
-      data: [],
-      select: []
+      data: []
     },
     markLine: {
-      data: [],
-      select: []
+      data: []
     }
   }]
 }

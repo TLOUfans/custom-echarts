@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="option" align="left" label-width="160px" :inline="true">
+  <el-form :model="option" align="left" label-width="130px" :inline="true">
     <el-form-item label="数据视图">
       <el-switch v-model="option.toolbox.feature.dataView.show" on-color="#13ce66" off-color="#ff4949"></el-switch>
     </el-form-item>

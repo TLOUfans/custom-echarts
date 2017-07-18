@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="option" label-width="160px" align="left">
+  <el-form :model="option" label-width="130px" align="left">
     <el-form-item label="标题">
       <el-input v-model="option.title.text" size="small" style="width: 240px;"></el-input>
     </el-form-item>

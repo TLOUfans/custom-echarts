@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="option" align="left" label-width="160px">
+  <el-form :model="option" align="left" label-width="120px">
     <el-form-item label="位置">
       <div class="divContainer">
         <el-tag>水平</el-tag>

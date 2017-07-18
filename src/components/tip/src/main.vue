@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="option" align="left" label-width="160px">
+  <el-form :model="option" align="left" label-width="130px">
     <el-form-item label="是否显示">
         <el-switch v-model="option.tooltip.show" on-color="#13ce66" off-color="#ff4949"></el-switch>
     </el-form-item>

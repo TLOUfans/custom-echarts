@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="option" align="left" label-width="160px">
+  <el-form :model="option" align="left" label-width="130px">
     <el-form-item label="图形主题">
       <el-select v-model="option.theme" placeholder="请选择主题" size="small" @change="themeChange">
         <el-option v-for="theme in themes" :key="theme.value" :label="theme.label" :value="theme.value">

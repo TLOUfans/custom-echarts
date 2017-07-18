@@ -3,9 +3,9 @@
     <el-col :span="24">
       <el-col :span="11">
         <template>
-          <el-tabs type="card" v-model="activeGraphics" @tab-click="graphicsTabClick">
+          <el-tabs type="border-card" v-model="activeGraphics" @tab-click="graphicsTabClick">
             <el-tab-pane label="柱/线图" name="bar">
-              <el-tabs v-model="activeBarName">
+              <el-tabs v-model="activeBarName" class="tab">
                 <el-tab-pane label="基本设置" name="second">
                   <my-base :option.sync="barOption" :mainCharts="mainCharts"></my-base>
                 </el-tab-pane>
@@ -40,7 +40,7 @@
               </el-tabs>
             </el-tab-pane>
             <el-tab-pane label="饼图" name="pie">
-              <el-tabs v-model="activePieName">
+              <el-tabs v-model="activePieName" class="tab">
                 <el-tab-pane label="基本设置" name="second">
                   <my-base :option.sync="pieOption" :mainCharts="mainCharts" :isPie="true"></my-base>
                 </el-tab-pane>
@@ -67,14 +67,14 @@
           </el-tabs>
         </template>
       </el-col>
+      <el-col :span="1">
+        &nbsp;
+      </el-col>
       <el-col :span="12">
         <div class="echarts">
           <div id="myCharts"></div>
           <el-button @click="saveBtnClick">保存配置</el-button>
         </div>
-      </el-col>
-      <el-col :span="1">
-      &nbsp;
       </el-col>
     </el-col>
   </el-row>
@@ -123,12 +123,10 @@
       graphicsTabClick(e) {
         if(e.name == 'bar') {
           this.isBar = true
-          this.mainCharts.clear()
-          this.mainCharts.setOption(this.barOption)
+          this.mainCharts.setOption(this.barOption, true)
         } else {
           this.isBar = false
-          this.mainCharts.clear()
-          this.mainCharts.setOption(this.pieOption)
+          this.mainCharts.setOption(this.pieOption, true)
         }
       },
       customBarCodeBtnClick(option) {
@@ -177,8 +175,8 @@
       window.onresize = function () {
         let $textarea = document.querySelector('.form textarea')
         $('.runBtn').css({
-          top: document.documentElement.clientHeight - 72,
-          left: 160 + $textarea.offsetWidth - document.querySelector('.runBtn').offsetWidth - 5
+          top: document.documentElement.clientHeight - 89,
+          left: 130 + $textarea.offsetWidth - document.querySelector('.runBtn').offsetWidth - 5
         })
       }
       
@@ -187,8 +185,15 @@
       this.pieOptionStr = JSON.stringify(this.pieOption, undefined, 2)
 
       $('.runBtn').css({
-        top: document.documentElement.clientHeight - 72,
-        left: 160 + 451 - 56 - 5
+        top: document.documentElement.clientHeight - 89,
+        left: 130 + 410 - 58 - 5
+      })
+
+      $('.el-form').css({
+        height: document.documentElement.clientHeight - 147
+      })
+      $('.el-form.axisForm').css({
+        height: document.documentElement.clientHeight - 204
       })
       //查询图表配置
       // querySetting({
@@ -220,7 +225,7 @@
                 return o.type = graphicsType
               })
             }
-            this.mainCharts.setOption(this.barOption)
+            this.mainCharts.setOption(this.barOption, true)
             this.barOptionStr = JSON.stringify(this.barOption, undefined, 2)
           }
         },
@@ -229,7 +234,7 @@
       pieOption: {
         handler: function(val, oldVal) {
           if(!this.isBar) {
-            this.mainCharts.setOption(this.pieOption)
+            this.mainCharts.setOption(this.pieOption, true)
             this.pieOptionStr = JSON.stringify(this.pieOption, undefined, 2)
           }
         },
@@ -243,8 +248,10 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .echarts {
-    position: fixed;
     height: 400px;
-    width: 50%;
+    width: 100%;
+  }
+  .el-form {
+    overflow-y: auto;
   }
 </style>

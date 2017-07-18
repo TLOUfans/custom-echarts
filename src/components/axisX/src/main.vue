@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="option" align="left" label-width="160px">
+  <el-form :model="option" align="left" label-width="130px" class="axisForm">
     <el-form-item label="坐标轴名称">
       <el-input v-model="option.xAxis.name" size="small" style="width:240px"></el-input>
     </el-form-item>

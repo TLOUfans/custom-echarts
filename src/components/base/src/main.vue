@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="option" align="left" label-width="160px">
+  <el-form :model="option" align="left" label-width="130px">
     <el-form-item label="画布大小">
       <div class="sliderContainer">
         <el-tag>宽度</el-tag>
