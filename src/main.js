@@ -16,6 +16,7 @@ import Legend from './components/legend/index'
 import Tip from './components/tip/index'
 import Tool from './components/tool/index'
 import Sequ from './components/sequ/index'
+import Extend from './components/extend/index'
 import Font from './components/font/index'
 
 require('echarts/theme/macarons')
@@ -35,6 +36,7 @@ Vue.use(Legend)
 Vue.use(Tip)
 Vue.use(Tool)
 Vue.use(Sequ)
+Vue.use(Extend)
 Vue.use(Font)
 Vue.prototype.$echarts = echarts
 

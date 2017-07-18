@@ -4,7 +4,7 @@
       <el-col :span="11">
         <template>
           <el-tabs type="card" v-model="activeGraphics" @tab-click="graphicsTabClick">
-            <el-tab-pane label="柱图" name="bar">
+            <el-tab-pane label="柱/线图" name="bar">
               <el-tabs v-model="activeBarName">
                 <el-tab-pane label="基本设置" name="second">
                   <my-base :option.sync="barOption" :mainCharts="mainCharts"></my-base>
@@ -34,7 +34,9 @@
                 <el-tab-pane label="序列" name="eighth" >
                   <my-sequ :option.sync="barOption" :mainCharts="mainCharts"></my-sequ>
                 </el-tab-pane>
-                <el-tab-pane label="扩展属性" name="ninth">扩展属性</el-tab-pane>
+                <el-tab-pane label="扩展属性" name="ninth">
+                  <my-extend :option.sync="barOptionStr" @customCodeBtnClick="customBarCodeBtnClick"></my-extend>
+                </el-tab-pane>
               </el-tabs>
             </el-tab-pane>
             <el-tab-pane label="饼图" name="pie">
@@ -57,20 +59,22 @@
                 <el-tab-pane label="序列" name="eighth" >
                   <my-sequ :option.sync="pieOption" :isPie="true" :mainCharts="mainCharts"></my-sequ>
                 </el-tab-pane>
-                <el-tab-pane label="扩展属性" name="ninth">扩展属性</el-tab-pane>
+                <el-tab-pane label="扩展属性" name="ninth">
+                  <my-extend :option.sync="pieOptionStr" @customCodeBtnClick="customPieCodeBtnClick"></my-extend>
+                </el-tab-pane>
               </el-tabs>
             </el-tab-pane>
           </el-tabs>
         </template>
-      </el-col>
-      <el-col :span="1">
-      &nbsp;
       </el-col>
       <el-col :span="12">
         <div class="echarts">
           <div id="myCharts"></div>
           <el-button @click="saveBtnClick">保存配置</el-button>
         </div>
+      </el-col>
+      <el-col :span="1">
+      &nbsp;
       </el-col>
     </el-col>
   </el-row>
@@ -94,7 +98,9 @@
         barOption: barData,
         pieOption: pieData,
         userID: '',
-        isBar: true
+        isBar: true,
+        barOptionStr: '',
+        pieOptionStr: '',
       }
     },
     methods: {
@@ -124,6 +130,26 @@
           this.mainCharts.clear()
           this.mainCharts.setOption(this.pieOption)
         }
+      },
+      customBarCodeBtnClick(option) {
+        try {
+          JSON.parse(option)
+        } catch(e) {
+          this.$message.error('JSON格式错误')
+        }
+        this.barOption = JSON.parse(option)
+        this.$set(this.barOption)
+        this.barOptionStr = option
+      },
+      customPieCodeBtnClick(option) {
+        try {
+          JSON.parse(option)
+        } catch(e) {
+          this.$message.error('JSON格式错误')
+        }
+        this.pieOption = JSON.parse(option)
+        this.$set(this.pieOption)
+        this.pieOptionStr = option
       }
     },
     mounted() {
@@ -139,14 +165,31 @@
       resizeCharts()
       this.mainCharts = this.$echarts.init(myCharts)
       const _self = this
+      //echarts切换柱图线图事件
       this.mainCharts.on('magictypechanged', (params) => {
         let graphicsType = params.currentType
         _self.barOption.series.map((o, i) => {
           return o.type = graphicsType
-        })
+        }),
+        this.barOptionStr = JSON.stringify(this.barOption, undefined, 2)
       })
-
+      //浏览器尺寸变化事件
+      window.onresize = function () {
+        let $textarea = document.querySelector('.form textarea')
+        $('.runBtn').css({
+          top: document.documentElement.clientHeight - 72,
+          left: 160 + $textarea.offsetWidth - document.querySelector('.runBtn').offsetWidth - 5
+        })
+      }
       
+      //给barOption和pieOption赋值
+      this.barOptionStr = JSON.stringify(this.barOption, undefined, 2)
+      this.pieOptionStr = JSON.stringify(this.pieOption, undefined, 2)
+
+      $('.runBtn').css({
+        top: document.documentElement.clientHeight - 72,
+        left: 160 + 451 - 56 - 5
+      })
       //查询图表配置
       // querySetting({
       //   swhere: `UserID='${this.userID}'`
@@ -178,6 +221,7 @@
               })
             }
             this.mainCharts.setOption(this.barOption)
+            this.barOptionStr = JSON.stringify(this.barOption, undefined, 2)
           }
         },
         deep: true
@@ -186,6 +230,7 @@
         handler: function(val, oldVal) {
           if(!this.isBar) {
             this.mainCharts.setOption(this.pieOption)
+            this.pieOptionStr = JSON.stringify(this.pieOption, undefined, 2)
           }
         },
         deep: true
@@ -198,7 +243,8 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .echarts {
+    position: fixed;
     height: 400px;
-    width: 100%;
+    width: 50%;
   }
 </style>
