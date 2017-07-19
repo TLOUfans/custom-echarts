@@ -6,6 +6,7 @@
         type="textarea"
         autosize
         placeholder="请输入内容"
+        resize="none"
         v-model="myOption">
       </el-input>
     </el-form-item>

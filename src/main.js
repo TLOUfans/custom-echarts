@@ -6,38 +6,23 @@ import router from './router'
 import ElementUI from 'element-ui'
 import echarts from 'echarts'
 import 'element-ui/lib/theme-default/index.css'
-//自定义组件
 
-import Base from './components/base/index'
-import Title from './components/title/index'
-import AxisX from './components/axisX/index'
-import AxisY from './components/axisY/index'
-import Legend from './components/legend/index'
-import Tip from './components/tip/index'
-import Tool from './components/tool/index'
-import Sequ from './components/sequ/index'
-import Extend from './components/extend/index'
-import Font from './components/font/index'
+//引入自定义组件
+import MyComponents from './components/myComponents'
 
+//引入echarts主题
 require('echarts/theme/macarons')
 require('echarts/theme/dark')
 require('echarts/theme/infographic')
 require('echarts/theme/roma')
 require('echarts/theme/shine')
 require('echarts/theme/vintage')
+
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 
-Vue.use(Base)
-Vue.use(Title)
-Vue.use(AxisX)
-Vue.use(AxisY)
-Vue.use(Legend)
-Vue.use(Tip)
-Vue.use(Tool)
-Vue.use(Sequ)
-Vue.use(Extend)
-Vue.use(Font)
+//使用自定义组件
+Vue.use(MyComponents)
 Vue.prototype.$echarts = echarts
 
 /* eslint-disable no-new */

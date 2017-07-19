@@ -14,7 +14,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="半径比例" v-if="isPie">
-        <el-slider v-model="radius" range :format-tooltip="formatRadius"></el-slider>
+        <el-slider v-model="radius" range :format-tooltip="formatRadius" :step="10" show-stops></el-slider>
       </el-form-item>
       <el-form-item label="南丁格尔图" v-if="isPie">
         <el-radio-group v-model="option.series[index].roseType">

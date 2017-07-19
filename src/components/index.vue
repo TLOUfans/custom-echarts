@@ -173,7 +173,7 @@
       })
       //浏览器尺寸变化事件
       window.onresize = function () {
-        let $textarea = document.querySelector('.form textarea')
+        let $textarea = $('.el-tab-pane[style!="display:none"]').find('textarea')[0]
         $('.runBtn').css({
           top: document.documentElement.clientHeight - 89,
           left: 130 + $textarea.offsetWidth - document.querySelector('.runBtn').offsetWidth - 5

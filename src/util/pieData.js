@@ -56,7 +56,7 @@ export const pieData = {
     selectedMode: false,
     name: '降水量',
     type: 'pie',
-    radius: ['0%', '55%'],
+    radius: ['0%', '50%'],
     center: ['25%', '50%'],
     data: [{
       value: 2.6,
@@ -132,7 +132,7 @@ export const pieData = {
     selectedMode: false,
     name: '蒸发量',
     type: 'pie',
-    radius: ['0%', '55%'],
+    radius: ['0%', '50%'],
     center: ['75%', '50%'],
     data: [{
       value: 2.0,
