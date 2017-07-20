@@ -206,6 +206,22 @@
       // })
     },
     created() {
+      let count = this.pieOption.series.length
+      this.pieOption.series.map((o, i) => {
+        if(i === 0) {
+          return o.center = [100 / count / 2  + '%' , '50%']
+        } if( i === count - 1) {
+          return o.center = [100 - 100 / count / 2  + '%' , '50%']
+        } else {
+          return o.center = [100 / count / 2 + i * 100 / count + '%' , '50%']
+        }
+      })
+
+      this.pieOption.series.map((o, i) => {
+        return o.radius[1] = 100 / count + '%'
+      })
+
+
       //登陆PMS
       // Login().then(res => {
       //   sessionStorage.userID = JSON.parse(res).data.humanid
